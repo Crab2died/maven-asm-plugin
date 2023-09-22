@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.maven.plugin.util.Constants.CLASS_SUFFIX;
 import static org.maven.plugin.util.Constants.METHOD_REPLACER_PLUGIN;
 
 @Mojo(name = Constants.METHOD_REPLACER_MOJO, defaultPhase = LifecyclePhase.COMPILE)
@@ -37,9 +38,7 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         long start = System.currentTimeMillis();
-        Log.info("-----------< ", Log.green(METHOD_REPLACER_PLUGIN), " >-----------");
-
-        Log.info("Parameters: [", output, "] => ", replaceParams);
+        getLog().info("-----------< " + Log.green(METHOD_REPLACER_PLUGIN) + " >-----------");
 
         // check params
         if (null == output || !output.exists()) {
@@ -74,7 +73,7 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
         }
         long cost = System.currentTimeMillis() - start;
 
-        Log.info("-----------< ", Log.green(METHOD_REPLACER_PLUGIN), " [ ", cost, " ms ] >-----------");
+        getLog().info("-----------< " + Log.green(METHOD_REPLACER_PLUGIN) + " [ " + cost + " ms ] >-----------");
 
     }
 
@@ -88,7 +87,7 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
             }
         }
         String fileName = file.getName();
-        if (fileName.endsWith(".class")) {
+        if (fileName.endsWith(CLASS_SUFFIX)) {
             final byte[] instrumentBytes = doInsertFile(file, params);
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 fos.write(instrumentBytes);

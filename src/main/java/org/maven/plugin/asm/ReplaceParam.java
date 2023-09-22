@@ -1,25 +1,19 @@
 package org.maven.plugin.asm;
 
-import org.apache.maven.plugins.annotations.Parameter;
 
 public class ReplaceParam {
 
-    @Parameter(name = "targetClass")
+
     private String targetClass;
 
-    @Parameter(name = "targetMethod")
     private String targetMethod;
 
-    @Parameter(name = "targetDescriptor")
     private String targetDescriptor;
 
-    @Parameter(name = "replaceClass")
     private String replaceClass;
 
-    @Parameter(name = "replaceMethod")
     private String replaceMethod;
 
-    @Parameter(name = "replaceDescriptor")
     private String replaceDescriptor;
 
     public ReplaceParam() {
