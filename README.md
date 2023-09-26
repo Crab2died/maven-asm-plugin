@@ -6,7 +6,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](https://search.maven.org/search?q=a:maven-asm-plugin)
 [![javadoc](https://javadoc.io/badge2/com.github.crab2died/maven-asm-plugin/1.0.0-Alpha/javadoc.svg)](https://javadoc.io/doc/com.github.crab2died/maven-asm-plugin/1.0.0-Alpha)
 
-## Quick Use
+## Quick Start
 ### Maven Plugin Configuration in pom.xml
 ```xml
 <build>
