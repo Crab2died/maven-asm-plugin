@@ -1,4 +1,4 @@
-package org.maven.plugin.asm;
+package com.github.crab2died.maven.plugin.asm;
 
 
 import org.apache.maven.plugin.logging.Log;

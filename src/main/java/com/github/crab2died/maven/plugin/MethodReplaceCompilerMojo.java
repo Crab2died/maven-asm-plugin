@@ -1,6 +1,8 @@
-package org.maven.plugin;
+package com.github.crab2died.maven.plugin;
 
 
+import com.github.crab2died.maven.plugin.asm.Param;
+import com.github.crab2died.maven.plugin.util.LogColor;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -9,10 +11,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
-import org.maven.plugin.asm.Param;
-import org.maven.plugin.asm.ReplaceClassVisitor;
-import org.maven.plugin.util.Constants;
-import org.maven.plugin.util.LogColor;
+import com.github.crab2died.maven.plugin.asm.ReplaceClassVisitor;
+import com.github.crab2died.maven.plugin.util.Constants;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -24,8 +24,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.maven.plugin.util.Constants.CLASS_SUFFIX;
-import static org.maven.plugin.util.Constants.METHOD_REPLACER_PLUGIN;
+import static com.github.crab2died.maven.plugin.util.Constants.CLASS_SUFFIX;
+import static com.github.crab2died.maven.plugin.util.Constants.METHOD_REPLACER_PLUGIN;
 
 @Mojo(name = Constants.METHOD_REPLACER_MOJO, defaultPhase = LifecyclePhase.COMPILE)
 public class MethodReplaceCompilerMojo extends AbstractMojo {

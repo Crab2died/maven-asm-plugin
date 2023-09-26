@@ -1,4 +1,4 @@
-package org.maven.plugin.util;
+package com.github.crab2died.maven.plugin.util;
 
 
 public final class StringUtils {

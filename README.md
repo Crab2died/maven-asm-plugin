@@ -13,7 +13,7 @@
     <plugins>
         ...
         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
+            <groupId>com.github.crab2died</groupId>
             <artifactId>maven-asm-plugin</artifactId>
             <version>${maven.asm.plugin.version}</version>
             <configuration>

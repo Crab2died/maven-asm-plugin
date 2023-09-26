@@ -1,5 +1,6 @@
-package org.maven.plugin;
+package com.github.crab2died.maven.plugin;
 
+import com.github.crab2died.maven.plugin.MethodReplaceCompilerMojo;
 import org.apache.maven.plugin.testing.AbstractMojoTestCase;
 
 import java.io.File;

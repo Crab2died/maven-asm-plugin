@@ -1,6 +1,6 @@
-package org.maven.plugin.util;
+package com.github.crab2died.maven.plugin.util;
 
-import org.maven.plugin.asm.MethodView;
+import com.github.crab2died.maven.plugin.asm.MethodView;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

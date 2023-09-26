@@ -1,6 +1,6 @@
-package org.maven.plugin.asm;
+package com.github.crab2died.maven.plugin.asm;
 
-import org.maven.plugin.util.MethodUtils;
+import com.github.crab2died.maven.plugin.util.MethodUtils;
 
 public class Param {
 

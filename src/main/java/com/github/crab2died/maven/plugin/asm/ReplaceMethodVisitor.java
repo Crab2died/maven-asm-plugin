@@ -1,8 +1,8 @@
-package org.maven.plugin.asm;
+package com.github.crab2died.maven.plugin.asm;
 
+import com.github.crab2died.maven.plugin.util.LogColor;
 import org.apache.maven.plugin.logging.Log;
-import org.maven.plugin.util.LogColor;
-import org.maven.plugin.util.StringUtils;
+import com.github.crab2died.maven.plugin.util.StringUtils;
 import org.objectweb.asm.MethodVisitor;
 
 import java.util.List;
