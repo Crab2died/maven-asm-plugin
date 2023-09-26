@@ -1,10 +1,10 @@
 # Maven ASM Plugin
 `maven plugin for the asm code compile`
 
-![version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![version](https://img.shields.io/badge/version-1.0.0-Alpha-green.svg)
 [![GitHub license](https://img.shields.io/github/license/Crab2died/maven-asm-plugin.svg)](https://github.com/Crab2died/maven-asm-plugin/blob/master/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](https://search.maven.org/search?q=a:maven-asm-plugin)
-[![javadoc](https://javadoc.io/badge2/com.github.crab2died/maven-asm-plugin/1.0.0/javadoc.svg)](https://javadoc.io/doc/com.github.crab2died/maven-asm-plugin/1.0.0)
+[![javadoc](https://javadoc.io/badge2/com.github.crab2died/maven-asm-plugin/1.0.0-Alpha/javadoc.svg)](https://javadoc.io/doc/com.github.crab2died/maven-asm-plugin/1.0.0-Alpha)
 
 ## Quick Use
 ### Maven Plugin Configuration in pom.xml
