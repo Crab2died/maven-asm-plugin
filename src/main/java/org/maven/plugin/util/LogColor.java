@@ -1,13 +1,13 @@
 package org.maven.plugin.util;
 
-public final class Log {
+public final class LogColor {
 
-    private Log() {
+    private LogColor() {
     }
 
     public static final String DEBUG = "DEBUG";
     public static final String INFO = "INFO";
-    public static final String WARN = "WARN";
+    public static final String WARN = "WARNING";
     public static final String ERROR = "ERROR";
     public static final String BOLD = "\u001B[1m";
     public static final String RED = "\u001B[31m";
@@ -18,30 +18,12 @@ public final class Log {
     public static final String REST = "\u001B[0m";
 
     public static final String LOG_DEBUG = "[" + BOLD + GREEN + DEBUG + REST + "] ";
-    public static final String LOG_INFO = "[" + BOLD + BLUE + INFO + REST + " ] ";
-
-    public static final String LOG_WARN = "[" + BOLD + YELLOW + WARN + REST + " ] ";
-
+    public static final String LOG_INFO = "[" + BOLD + BLUE + INFO + REST + "] ";
+    public static final String LOG_WARN = "[" + BOLD + YELLOW + WARN + REST + "] ";
     public static final String LOG_ERROR = "[" + BOLD + RED + ERROR + REST + "] ";
 
-    private static void print(String prefix, Object... s) {
-        System.out.println(prefix + StringUtils.join(s));
-    }
-
-    public static void debug(Object... s) {
-        print(LOG_DEBUG, s);
-    }
-
-    public static void info(Object... s) {
-        print(LOG_INFO, s);
-    }
-
-    public static void warn(Object... s) {
-        print(LOG_WARN, s);
-    }
-
-    public static void error(Object... s) {
-        print(LOG_ERROR, s);
+    public static String bold(Object c) {
+        return BOLD + c + REST;
     }
 
     public static String green(Object c) {

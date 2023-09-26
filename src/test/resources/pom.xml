@@ -1,17 +1,26 @@
-# Maven ASM Plugin
-`maven plugin for the asm code compile`
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-![version](https://img.shields.io/badge/version-1.0.0-green.svg)
-[![GitHub license](https://img.shields.io/github/license/Crab2died/maven-asm-plugin.svg)](https://github.com/Crab2died/maven-asm-plugin/blob/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/org.apache.maven/apache-maven.svg)](https://search.maven.org/search?q=a:maven-asm-plugin)
-[![javadoc](https://javadoc.io/badge2/com.github.crab2died/maven-asm-plugin/1.0.0/javadoc.svg)](https://javadoc.io/doc/com.github.crab2died/maven-asm-plugin/1.0.0)
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-asm-plugin</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
 
-## Quick Use
-### Maven Plugin Configuration in pom.xml
-```xml
+    <name>maven-asm-plugin</name>
+    <description>maven plugin for the ASM code compile</description>
+    <url>https://github.com/Crab2died/maven-asm-plugin</url>
+
+    <properties>
+        <maven.asm.plugin.version>1.0.0-SNAPSHOT</maven.asm.plugin.version>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
     <build>
         <plugins>
-            ...
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-asm-plugin</artifactId>
@@ -41,7 +50,7 @@
                     </execution>
                 </executions>
             </plugin>
-            ...
         </plugins>
     </build>
-```
+
+</project>

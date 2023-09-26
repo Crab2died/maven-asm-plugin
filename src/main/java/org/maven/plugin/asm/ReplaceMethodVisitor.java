@@ -1,26 +1,29 @@
 package org.maven.plugin.asm;
 
-import org.maven.plugin.util.Log;
+import org.apache.maven.plugin.logging.Log;
+import org.maven.plugin.util.LogColor;
 import org.maven.plugin.util.StringUtils;
 import org.objectweb.asm.MethodVisitor;
 
-import java.io.File;
 import java.util.List;
 
 public class ReplaceMethodVisitor extends MethodVisitor {
 
-    private final File targetFile;
+    private final String parentClass;
 
-    private final String targetParentMethod;
+    private final String parentMethod;
 
-    private final List<ReplaceParam> params;
+    private final List<Param> params;
 
-    public ReplaceMethodVisitor(int api, MethodVisitor methodVisitor, File targetFile,
-                                String targetParentMethod, List<ReplaceParam> params) {
+    private final Log log;
+
+    public ReplaceMethodVisitor(int api, MethodVisitor methodVisitor, String parentClass,
+                                String parentMethod, List<Param> params, Log log) {
         super(api, methodVisitor);
-        this.targetFile = targetFile;
-        this.targetParentMethod = targetParentMethod;
+        this.parentClass = parentClass;
+        this.parentMethod = parentMethod;
         this.params = params;
+        this.log = log;
     }
 
     @Override
@@ -32,20 +35,20 @@ public class ReplaceMethodVisitor extends MethodVisitor {
         String newOwner = owner;
         String newName = name;
         String newDescriptor = descriptor;
-        for (ReplaceParam param : params) {
-            String targetClass = param.getTargetClass();
-            String targetMethod = param.getTargetMethod();
-            String targetDescriptor = StringUtils.isBlank(param.getTargetDescriptor()) ? descriptor : param.getTargetDescriptor();
-            String replaceClass = param.getReplaceClass();
-            String replaceMethod = param.getReplaceMethod();
-            String replaceDescriptor = StringUtils.isBlank(param.getReplaceDescriptor()) ? descriptor : param.getReplaceDescriptor();
-            if (targetClass.equals(owner) && targetMethod.equals(name) && targetDescriptor.equals(descriptor)) {
-                Log.info("Method replaced: [", Log.blue(targetFile.getPath() + "#" + targetParentMethod), "] => ",
-                        Log.cyan(targetClass + "#" + targetMethod + targetDescriptor), " -> ",
-                        Log.green(replaceClass + "#" + replaceMethod + replaceDescriptor));
-                newOwner = replaceClass;
-                newName = replaceMethod;
-                newDescriptor = replaceDescriptor;
+        for (Param param : params) {
+            MethodView targetMethod = param.targetMethod();
+            MethodView replaceMethod = param.replacerMethod();
+
+            // exclude self class
+            if (targetMethod.getClassName().equals(parentClass) || replaceMethod.getClassName().equals(parentClass)) continue;
+            if (targetMethod.compare(owner, name, descriptor)) {
+                log.info(LogColor.blue(parentClass + "#" + parentMethod) + " => " +
+                        LogColor.cyan(targetMethod) + " -> " + LogColor.green(replaceMethod));
+                newOwner = replaceMethod.getClassName();
+                newName = replaceMethod.getMethodName();
+                if (!StringUtils.isBlank(replaceMethod.getDescriptor())) {
+                    newDescriptor = replaceMethod.getDescriptor();
+                }
                 break;
             }
         }
