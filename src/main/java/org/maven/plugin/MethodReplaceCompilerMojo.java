@@ -108,4 +108,12 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
         return new String[0];
     }
 
+    public File getOutput() {
+        return output;
+    }
+
+    public List<Param> getParams() {
+        return params;
+    }
+
 }
