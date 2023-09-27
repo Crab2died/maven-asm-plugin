@@ -41,6 +41,8 @@ public class ReplaceMethodVisitor extends MethodVisitor {
 
             // exclude self class
             if (targetMethod.getClassName().equals(parentClass) || replaceMethod.getClassName().equals(parentClass)) continue;
+
+            //
             if (targetMethod.compare(owner, name, descriptor)) {
                 log.info(LogColor.blue(parentClass + "#" + parentMethod) + " => " +
                         LogColor.cyan(targetMethod) + " -> " + LogColor.green(replaceMethod));

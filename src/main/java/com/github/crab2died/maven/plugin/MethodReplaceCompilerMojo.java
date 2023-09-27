@@ -58,11 +58,11 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
         }
 
         FileSetManager fileSetManager = new FileSetManager();
-        FileSet jarContentFileSet = new FileSet();
-        jarContentFileSet.setDirectory(output.getAbsolutePath());
-        jarContentFileSet.setIncludes(Arrays.asList(getIncludes()));
-        jarContentFileSet.setExcludes(Arrays.asList(getExcludes()));
-        String[] includedFiles = fileSetManager.getIncludedFiles(jarContentFileSet);
+        FileSet fileSet = new FileSet();
+        fileSet.setDirectory(output.getAbsolutePath());
+        fileSet.setIncludes(Arrays.asList(getIncludes()));
+        fileSet.setExcludes(Arrays.asList(getExcludes()));
+        String[] includedFiles = fileSetManager.getIncludedFiles(fileSet);
         if (null == includedFiles || includedFiles.length == 0) return;
         for (String includeFile : includedFiles) {
             try {
