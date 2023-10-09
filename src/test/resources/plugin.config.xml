@@ -19,6 +19,9 @@
                             <replacer>packageName.ReplacerClassName#replacerMethodName(packageNam.ParmaClassName, packageNam.ParmaClassName)packageNam.ReturnClassName</replacer>
                         </param>
                     </params>
+                    <asmApiVersion>ASM9</asmApiVersion>
+                    <asmClassWriterFlags>COMPUTE_MAXS | COMPUTE_FRAMES</asmClassWriterFlags>
+                    <asmParsingOptions>SKIP_CODE | SKIP_DEBUG</asmParsingOptions>
                 </configuration>
                 <executions>
                     <execution>
