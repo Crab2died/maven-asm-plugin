@@ -49,12 +49,16 @@
 </build>
 ```
 ### Plugin Configuration Parameters
-- includes: include files, default `**/**.clas`
+- includes: include files, default `**/**.class`
 - excludes: exclude files, default empty
 - output: output directory, default `${project.build.directory}`
-- params: method replace configuration setting
-  - param.target: target method
-  - param.replacer: replace method
+- params: method replace configuration settings
+  - target: target method description, refer: Method Description
+  - replacer: replace method description, refer: Method Description
 - asmApiVersion: ASM API Version, `ASM4, ASM5, ASM6, ASM7, ASM8, ASM9`, default `ASM9`
 - asmClassWriterFlags: ASM class writer flags, `COMPUTE_MAXS | COMPUTE_FRAMES` or empty, default empty
 - asmParsingOptions: ASM class reader parsing options, `SKIP_CODE | SKIP_DEBUG | SKIP_FRAMES | EXPAND_FRAMES` or empty, default empty
+
+### Method Description
+- method not with arguments and return: `packageNam.ClassName#methodName`
+- method with arguments and return: `packageNam.ClassName#methodName(packageNam.ParmaClassName, packageNam.ParmaClassName)packageNam.ReturnClassName`
