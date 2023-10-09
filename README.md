@@ -30,6 +30,9 @@
                         <replacer>packageName.ReplacerClassName#replacerMethodName(packageNam.ParmaClassName, packageNam.ParmaClassName)packageNam.ReturnClassName</replacer>
                     </param>
                 </params>
+                <asmApiVersion>ASM9</asmApiVersion>
+                <asmClassWriterFlags>COMPUTE_MAXS | COMPUTE_FRAMES</asmClassWriterFlags>
+                <asmParsingOptions>SKIP_CODE | SKIP_DEBUG</asmParsingOptions>
             </configuration>
             <executions>
                 <execution>
@@ -45,3 +48,13 @@
     </plugins>
 </build>
 ```
+### Plugin Configuration Parameters
+- includes: include files, default `**/**.clas`
+- excludes: exclude files, default empty
+- output: output directory, default `${project.build.directory}`
+- params: method replace configuration setting
+  - param.target: target method
+  - param.replacer: replace method
+- asmApiVersion: ASM API Version, `ASM4, ASM5, ASM6, ASM7, ASM8, ASM9`, default `ASM9`
+- asmClassWriterFlags: ASM class writer flags, `COMPUTE_MAXS | COMPUTE_FRAMES` or empty, default empty
+- asmParsingOptions: ASM class reader parsing options, `SKIP_CODE | SKIP_DEBUG | SKIP_FRAMES | EXPAND_FRAMES` or empty, default empty

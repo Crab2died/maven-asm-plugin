@@ -43,7 +43,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <asm.version>9.2</asm.version>
+        <asm.version>9.5</asm.version>
         <file.management.version>3.1.0</file.management.version>
         <plexus.utils.version>3.5.1</plexus.utils.version>
         <maven.version>3.6.0</maven.version>

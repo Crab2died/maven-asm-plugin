@@ -2,7 +2,10 @@ package com.github.crab2died.maven.plugin;
 
 
 import com.github.crab2died.maven.plugin.asm.Param;
+import com.github.crab2died.maven.plugin.asm.ReplaceClassVisitor;
+import com.github.crab2died.maven.plugin.util.Constants;
 import com.github.crab2died.maven.plugin.util.LogColor;
+import com.github.crab2died.maven.plugin.util.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -11,8 +14,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
-import com.github.crab2died.maven.plugin.asm.ReplaceClassVisitor;
-import com.github.crab2died.maven.plugin.util.Constants;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
@@ -43,6 +44,15 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
 
     @Parameter(name = "params")
     private List<Param> params;
+
+    @Parameter(name = "asmApiVersion", defaultValue = "ASM9")
+    private String asmApiVersion;
+
+    @Parameter(name = "asmClassWriterFlags")
+    private String asmClassWriterFlags;
+
+    @Parameter(name = "asmParsingOptions")
+    private String asmParsingOptions;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -89,8 +99,8 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
 
     private byte[] doInsertFile(File file, List<Param> params) throws IOException {
         ClassReader cr = new ClassReader(new FileInputStream(file));
-        ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-        cr.accept(new ReplaceClassVisitor(Opcodes.ASM9, cw, params, getLog()), ClassReader.SKIP_DEBUG);
+        ClassWriter cw = new ClassWriter(getAsmClassWriterFlags());
+        cr.accept(new ReplaceClassVisitor(getAsmApiVersion(), cw, params, getLog()), getAsmParsingOptions());
         return cw.toByteArray();
     }
 
@@ -108,12 +118,70 @@ public class MethodReplaceCompilerMojo extends AbstractMojo {
         return new String[0];
     }
 
-    public File getOutput() {
-        return output;
+    public int getAsmApiVersion() {
+        asmApiVersion = asmApiVersion.trim().toUpperCase();
+        switch (asmApiVersion) {
+            case "ASM4":
+                return Opcodes.ASM4;
+            case "ASM5":
+                return Opcodes.ASM5;
+            case "ASM6":
+                return Opcodes.ASM6;
+            case "ASM7":
+                return Opcodes.ASM7;
+            case "ASM8":
+                return Opcodes.ASM8;
+            default:
+                return Opcodes.ASM9;
+        }
     }
 
-    public List<Param> getParams() {
-        return params;
+    public int getAsmClassWriterFlags() {
+        int classWriterFlag = 0;
+        if (StringUtils.isBlank(asmClassWriterFlags)) return classWriterFlag;
+        String[] flags = asmClassWriterFlags.split("\\|");
+        for (String flag : flags) {
+            classWriterFlag = classWriterFlag | getFlag(flag);
+        }
+        return classWriterFlag;
+    }
+
+    public int getAsmParsingOptions() {
+        int parsingOptions = 0;
+        if (StringUtils.isBlank(asmParsingOptions)) return parsingOptions;
+        String[] options = asmParsingOptions.split("\\|");
+        for (String option : options) {
+            parsingOptions = parsingOptions | getParsingOption(option);
+        }
+        return parsingOptions;
+    }
+
+    public int getFlag(String flag) {
+        flag = flag.trim().toUpperCase();
+        switch (flag) {
+            case "COMPUTE_MAXS":
+                return ClassWriter.COMPUTE_MAXS;
+            case "COMPUTE_FRAMES":
+                return ClassWriter.COMPUTE_FRAMES;
+            default:
+                return 0;
+        }
+    }
+
+    public int getParsingOption(String option) {
+        option = option.trim().toUpperCase();
+        switch (option) {
+            case "SKIP_CODE":
+                return ClassReader.SKIP_CODE;
+            case "SKIP_DEBUG":
+                return ClassReader.SKIP_DEBUG;
+            case "SKIP_FRAMES ":
+                return ClassReader.SKIP_FRAMES;
+            case "EXPAND_FRAMES":
+                return ClassReader.EXPAND_FRAMES;
+            default:
+                return 0;
+        }
     }
 
 }
